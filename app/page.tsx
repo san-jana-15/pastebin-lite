@@ -13,9 +13,17 @@ export default function Home() {
       body: JSON.stringify({ content }),
     });
 
+    // 🔒 Always check before parsing JSON
+    if (!res.ok) {
+      const text = await res.text();
+      alert("Failed to create paste: " + text);
+      return;
+    }
+
     const data = await res.json();
     setUrl(data.url);
   }
+
 
   return (
     <main style={{ padding: 20 }}>
