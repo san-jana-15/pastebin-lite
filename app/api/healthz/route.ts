@@ -3,9 +3,10 @@ import { kv } from "@vercel/kv";
 
 export async function GET() {
   try {
-    await kv.set("healthcheck", "ok");
+    // simple KV ping
+    await kv.ping();
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (e) {
     return NextResponse.json({ ok: false }, { status: 500 });
   }
 }
